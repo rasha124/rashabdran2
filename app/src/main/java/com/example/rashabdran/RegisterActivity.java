@@ -22,14 +22,14 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(activity_register);
+        setContentView(R.layout.activity_register);
 
         etMail= findViewById(R.id.editTextTextEmailAddress2);
         etPassword= findViewById(R.id.editTextTextPassword2);
         btnRegister= findViewById(R.id.buttonRegister);
         btnCancel= findViewById(R.id.buttonCancel);
 
-        preferences = getSharedPreferences("Userinfo",'0');
+        preferences = getSharedPreferences("userinfo",'0');
     }
     public void register (View view)
     {
@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
          editor.putString("password",input_password);
 
          editor.apply();
-         Toast.makeText(this,"User ragistred !",Toast.LENGTH_LONG).show();
+         Toast.makeText(this,"User registered !",Toast.LENGTH_LONG).show();
          Intent intent_main= new Intent(this, MainActivity.class);
          startActivity(intent_main);
      }else {

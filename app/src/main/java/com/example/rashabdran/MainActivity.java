@@ -1,5 +1,8 @@
 package com.example.rashabdran;
 
+import static com.example.rashabdran.R.id.about_menu;
+import static com.example.rashabdran.R.id.sitting;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
         private EditText etMail, etpassword;
@@ -31,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         etMail=findViewById(R.id.editTextTextEmailAddress);
         etpassword=findViewById(R.id.editTextTextPassword);
         btnLogin=findViewById(R.id.buttonLogin);
-      //  btnSingup=findViewById(R.id.buttonRegister);
+        btnSingup=findViewById(R.id.Register);
         preferences=getSharedPreferences("userinfo",0);
     }
     //this method loads the menu design into this activity
@@ -41,15 +45,18 @@ public class MainActivity extends AppCompatActivity {
        return true;
     }
 
+
+
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         //in case user chose about menu
-        if(item.getItemId()== R.id.about_menu){
+        if(item.getItemId()== about_menu){
             Intent i=new Intent(this,AboutActivity.class);
             startActivity(i);
 
        }
-        else if(item.getItemId()==R.id.sitting){
+        else if(item.getItemId()== sitting){
             Intent i=new Intent(this,listActivity.class);
             startActivity(i);
 
@@ -87,7 +94,16 @@ public class MainActivity extends AppCompatActivity {
         String input_mail = etMail.getText().toString();
         String input_password = etpassword.getText().toString();
 
+        String registeredMail = preferences.getString("Username", "");
+        String registeredPassword = preferences.getString("password", "");
+        if (input_mail.equals(registeredMail) && input_password.equals(registeredPassword)) {
+            Intent i_mail = new Intent(this, HomeActivity.class);
+            startActivity(i_mail);
 
+
+        } else {
+            Toast.makeText(this, "Incorrect credentials!", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 
