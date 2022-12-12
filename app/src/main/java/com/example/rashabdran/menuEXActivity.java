@@ -31,7 +31,7 @@ public class menuEXActivity extends AppCompatActivity {
             case R.id.about_menu:
                 Toast.makeText(getApplicationContext(), "Item 2 Selected", Toast.LENGTH_LONG).show();
                 return true;
-            case R.id.home:
+            case R.id.Home:
                 Toast.makeText(getApplicationContext(), "Item 3 Selected", Toast.LENGTH_LONG).show();
                 return true;
             default:

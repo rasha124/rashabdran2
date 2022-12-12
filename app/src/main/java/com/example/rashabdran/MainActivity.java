@@ -1,6 +1,8 @@
 package com.example.rashabdran;
 
+import static com.example.rashabdran.R.id.Home;
 import static com.example.rashabdran.R.id.about_menu;
+import static com.example.rashabdran.R.id.help;
 import static com.example.rashabdran.R.id.sitting;
 
 import androidx.annotation.NonNull;
@@ -57,9 +59,18 @@ public class MainActivity extends AppCompatActivity {
 
        }
         else if(item.getItemId()== sitting){
-            Intent i=new Intent(this,listActivity.class);
-            startActivity(i);
+            Intent m=new Intent(this,listActivity.class);
+            startActivity(m);
 
+        }
+        else if (item.getItemId()== Home)
+        {
+            Intent n= new Intent(this, HomeActivity.class);
+            startActivity(n);
+        }
+        else if (item.getItemId()== help) {
+            Intent r = new Intent(this, HelpActivity.class);
+            startActivity(r);
         }
         return true ;
     }
@@ -70,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder dialog=new AlertDialog.Builder(this);
         dialog.setTitle("Back Button Was pressed !");
         dialog.setMessage("Are you sure you want to Exit ");
-        //in case the user chose no ,nothimg happens
+        //in case the user chose no ,nothing happens
          dialog.setNegativeButton("No",null);
          //when the user clicks on the yes button the application closes
          dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
