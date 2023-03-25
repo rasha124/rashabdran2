@@ -41,11 +41,7 @@ public class MainActivity extends AppCompatActivity {
         preferences=getSharedPreferences("userinfo",0);
     }
     //this method loads the menu design into this activity
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-       getMenuInflater().inflate(R.menu.menuexample, menu);
-       return true;
-    }
+
 
 
 

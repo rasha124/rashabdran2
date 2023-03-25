@@ -71,6 +71,6 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         if (requestCode == CAMERA_REQUEST &&requestCode == RESULT_OK){ // hl ana nj7t aswr aza aa 5od alsora b data w23rd alsora 3n trek al bitmap .
             bitmap = ( Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(bitmap);
-        }
+         }
     }
 }
