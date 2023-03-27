@@ -39,7 +39,9 @@ package com.example.rashabdran;
         // when the user clicks the on the notification the
         // pending intent is called
         nBuilder.setContentIntent(pendingIntent);
-        nBuilder.setChannelId(CHANNEL_ID);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            nBuilder.setChannelId(CHANNEL_ID);
+        }
 
         Notification notification = nBuilder.build();
         NotificationManagerCompat managerCompat =NotificationManagerCompat.from(this);

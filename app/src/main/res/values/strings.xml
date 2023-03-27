@@ -6,10 +6,5 @@
     <string name="help">help</string>
     <string name="channel_name">Channel_name</string>
     <string name="channel_description">Channel_description</string>
-    <string name="title_listiems">Title For List Items</string>
-    <string name="description">wlshi</string>
-    <string name="like">Like</string>
-    <string name="comment">Comment</string>
-    <string name="more">More</string>
-    <string name="share">Share</string>
+
 </resources>

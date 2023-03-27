@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
         private EditText etMail, etpassword;
@@ -29,16 +35,47 @@ public class MainActivity extends AppCompatActivity {
         private final String valid_mail="admin";
         private final String valid_password="1";
         SharedPreferences preferences;
+        //object for interacting with the firebase
+        private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //connect to the firebase of the project
+        mAuth =FirebaseAuth.getInstance();
 
         etMail=findViewById(R.id.editTextTextEmailAddress);
         etpassword=findViewById(R.id.editTextTextPassword);
         btnLogin=findViewById(R.id.buttonLogin);
         btnSingup=findViewById(R.id.Register);
         preferences=getSharedPreferences("userinfo",0);
+    }
+    //implement sign in method with login of behaviour
+    public void signIn(String email, String password){
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            // you can do intent and move to next page
+                            Log.w("FIREBASE", "createUserWithEmail:success");
+
+                            Intent i_mail = new Intent(MainActivity.this, HomeActivity.class);
+                            startActivity(i_mail);
+
+                        } else {
+
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            Log.w("FIREBASE", "createUserWithEmail:failure", task.getException());
+                        }
+
+                        // ...
+                    }
+                });
     }
     //this method loads the menu design into this activity
 
@@ -103,14 +140,17 @@ public class MainActivity extends AppCompatActivity {
 
         String registeredMail = preferences.getString("Username", "");
         String registeredPassword = preferences.getString("password", "");
-        if (input_mail.equals(registeredMail) && input_password.equals(registeredPassword)) {
+        //
+        signIn(input_mail, input_password);
+
+      /*  if (input_mail.equals(registeredMail) && input_password.equals(registeredPassword)) {
             Intent i_mail = new Intent(this, HomeActivity.class);
             startActivity(i_mail);
 
 
         } else {
             Toast.makeText(this, "Incorrect credentials!", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 }
 
